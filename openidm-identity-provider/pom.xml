@@ -35,7 +35,7 @@
 
     <dependencies>
         <!-- Commons Dependencies -->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.forgerock.commons.guava</groupId>
             <artifactId>forgerock-guava-base</artifactId>
             <version>18.0.4</version>
@@ -44,7 +44,7 @@
             <groupId>org.forgerock.commons.guava</groupId>
             <artifactId>forgerock-guava-collect</artifactId>
             <version>18.0.4</version>
-        </dependency>
+        </dependency>  -->
         <dependency>
             <groupId>org.forgerock.commons</groupId>
             <artifactId>forgerock-selfservice-core</artifactId>
@@ -54,9 +54,14 @@
             <artifactId>forgerock-selfservice-stages</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>23.2-android</version>
+        </dependency>
+        <dependency>
             <groupId>org.forgerock.http</groupId>
             <artifactId>chf-client-apache-async</artifactId>
-        </dependency>
+        </dependency> 
 
         <!-- OpenIDM Dependencies -->
         <dependency>

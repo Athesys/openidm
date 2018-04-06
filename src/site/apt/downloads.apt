@@ -32,9 +32,9 @@
 
 Downloads
 
-    Downloads are available from the {{{http://maven.forgerock.org/repo/releases/org/forgerock/openidm/}ForgeRock Maven repository}}
+    Downloads are available from the {{{https://github.com/Athesys/openidm/releases/}Athesys Github repository}}
 
-    * OpenIDM Zip  {{{http://maven.forgerock.org/repo/releases/org/forgerock/openidm/openidm-zip/2.0.0/}openidm-zip-2.0.0.zip}}
+    * OpenIDM Zip  {{{https://github.com/Athesys/openidm/releases/}openidm-zip-5.5.0-SNAPSHOT.zip}}
 
 
 

@@ -79,7 +79,7 @@ public class ClientCertAuthModule implements AsyncServerAuthModule {
      * @param options {@inheritDoc}
      * @return {@inheritDoc}
      */
-    @Override
+    /*@Override
     public void initialize(MessagePolicy requestPolicy, MessagePolicy responsePolicy,CallbackHandler handler,
             Map<String, Object> options) throws AuthenticationException {
 
@@ -97,6 +97,28 @@ public class ClientCertAuthModule implements AsyncServerAuthModule {
         allowedAuthenticationIdPatterns = properties.get(ALLOWED_AUTHENTICATION_ID_PATTERNS)
                 .defaultTo(new ArrayList<String>())
                 .asList(String.class);
+    }*/
+    
+    @Override
+    public Promise<Void, AuthenticationException> initialize(MessagePolicy requestPolicy, MessagePolicy responsePolicy,
+            CallbackHandler handler, Map<String, Object> options) {
+
+        final JsonValue properties = new JsonValue(options);
+
+        String clientAuthOnlyStr = IdentityServer.getInstance().getProperty("openidm.auth.clientauthonlyports");
+        if (clientAuthOnlyStr != null) {
+            String[] split = clientAuthOnlyStr.split(",");
+            for (String entry : split) {
+                clientAuthOnly.add(Integer.valueOf(entry));
+            }
+        }
+        logger.info("Authentication disabled on ports: {}", clientAuthOnly);
+
+        allowedAuthenticationIdPatterns = properties.get(ALLOWED_AUTHENTICATION_ID_PATTERNS)
+                .defaultTo(new ArrayList<String>())
+                .asList(String.class);
+
+        return newResultPromise(null);
     }
 
     /**

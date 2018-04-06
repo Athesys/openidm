@@ -103,7 +103,7 @@
         <dependency>
             <groupId>org.forgerock.commons.ui.libs</groupId>
             <artifactId>jquery-cron</artifactId>
-            <version>f831f2</version>
+            <version>0.1.4.1</version>
             <type>js</type>
         </dependency>
 
@@ -117,7 +117,7 @@
         <dependency>
             <groupId>org.forgerock.commons.ui.libs</groupId>
             <artifactId>bootstrap-tabdrop</artifactId>
-            <version>1.0</version>
+            <version>master</version>
             <type>js</type>
         </dependency>
 
@@ -233,6 +233,47 @@
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
+                <!-- Add this to disable stop on warning -->
+                <!-- <configuration>
+                	<arguments>- -force</arguments>
+                </configuration> -->
+				<version>0.0.28</version>
+				<configuration>
+					<installDirectory>${node.install.directory}</installDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install-node-and-npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<phase>initialize</phase>
+						<configuration>
+							<nodeVersion>v4.4.2</nodeVersion>
+							<npmVersion>3.8.5</npmVersion>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm-install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>initialize</phase>
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>grunt</id>
+						<goals>
+							<goal>grunt</goal>
+						</goals>
+						<phase>compile</phase>
+						<configuration>
+							<arguments>${grunt.task} --target-version=${project.version} --force</arguments>
+						</configuration>
+					</execution>
+				</executions>
             </plugin>
 
             <plugin>

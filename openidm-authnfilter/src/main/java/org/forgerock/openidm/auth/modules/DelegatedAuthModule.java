@@ -107,13 +107,23 @@ public class DelegatedAuthModule implements AsyncServerAuthModule {
      * @param handler {@inheritDoc}
      * @param options {@inheritDoc}
      */
-    @Override
+    /*@Override
     public void initialize(MessagePolicy requestPolicy, MessagePolicy responsePolicy, CallbackHandler handler,
             Map<String, Object> options) throws AuthenticationException {
         this.options = new JsonValue(options);
         queryOnResource = new JsonValue(options).get(IDMAuthModuleWrapper.QUERY_ON_RESOURCE).required().asString();
         authenticator = authenticatorFactory.apply(this.options);
+    }*/
+    
+    @Override
+    public Promise<Void, AuthenticationException> initialize(MessagePolicy requestPolicy, MessagePolicy responsePolicy,
+            CallbackHandler handler, Map<String, Object> options) {
+        this.options = new JsonValue(options);
+        queryOnResource = new JsonValue(options).get(IDMAuthModuleWrapper.QUERY_ON_RESOURCE).required().asString();
+        authenticator = authenticatorFactory.apply(this.options);
+        return newResultPromise(null);
     }
+
 
     /**
      * Validates the client's request by passing through the request to be authenticated against a OpenICF Connector.

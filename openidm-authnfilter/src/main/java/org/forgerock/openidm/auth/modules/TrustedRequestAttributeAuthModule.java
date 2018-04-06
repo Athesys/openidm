@@ -65,11 +65,19 @@ public class TrustedRequestAttributeAuthModule implements AsyncServerAuthModule 
      * @param options {@inheritDoc}
      * @return {@inheritDoc}
      */
-    @Override
+    /*@Override
     public void initialize(MessagePolicy requestPolicy, MessagePolicy responsePolicy, CallbackHandler handler,
             Map<String, Object> options) throws AuthenticationException {
         JsonValue properties = json(options);
         authenticationIdAttribute = properties.get(AUTHENTICATION_ID).required().asString();
+    }*/
+    
+    @Override
+    public Promise<Void, AuthenticationException> initialize(MessagePolicy requestPolicy, MessagePolicy responsePolicy,
+            CallbackHandler handler, Map<String, Object> options) {
+        JsonValue properties = json(options);
+        authenticationIdAttribute = properties.get(AUTHENTICATION_ID).required().asString();
+        return newResultPromise(null);
     }
 
     /**

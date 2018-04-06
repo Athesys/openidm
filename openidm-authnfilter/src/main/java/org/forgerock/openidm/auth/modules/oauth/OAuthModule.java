@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
+import java.util.List;
 
 import javax.security.auth.Subject;
 import javax.security.auth.callback.Callback;
@@ -104,7 +105,7 @@ public class OAuthModule implements AsyncServerAuthModule {
         return "OAuth";
     }
 
-    @Override
+    /*@Override
     public void initialize(MessagePolicy requestPolicy, MessagePolicy responsePolicy, CallbackHandler callbackHandler,
             Map<String, Object> config) throws AuthenticationException {
 
@@ -133,6 +134,41 @@ public class OAuthModule implements AsyncServerAuthModule {
             LOG.debug("OAuth config is invalid. You must configure at least one valid resolver.");
             throw new AuthenticationException("OAuthModule configuration is invalid.");
         }
+    }*/
+    
+    @Override
+    public Promise<Void, AuthenticationException> initialize(MessagePolicy requestPolicy, MessagePolicy responsePolicy,
+            CallbackHandler callbackHandler, Map<String, Object> config) {
+
+        this.authTokenHeader = (String) config.get(HEADER_TOKEN);
+        this.authResolverHeader = (String) config.get(HEADER_AUTH_RESOLVER);
+
+        this.callbackHandler = callbackHandler;
+
+        if (authTokenHeader == null || authTokenHeader.isEmpty()) {
+            LOG.debug("OAuthModule config is invalid. You must include the auth token header key parameter");
+            return newExceptionPromise(new AuthenticationException("OAuthModule configuration is invalid."));
+        }
+
+        if (authResolverHeader == null || authResolverHeader.isEmpty()) {
+            LOG.debug("OAuthModule config is invalid. You must include the auth provider header key parameter");
+            return newExceptionPromise(new AuthenticationException("OAuthModule configuration is invalid."));
+        }
+
+        //final List<Map<String, String>> resolvers = (List<Map<String, String>>) config.get(RESOLVERS_KEY);
+        
+        final JsonValue resolvers = json(config.get(RESOLVERS_KEY));
+
+        resolverService = new OAuthResolverServiceImpl();
+
+        // if we weren't able to set up the service, or any one of the supplied resolver configs was invalid,
+        // error out here
+        if (!serviceConfigurator.configureService(resolverService, resolvers)) {
+            LOG.debug("OAuth config is invalid. You must configure at least one valid resolver.");
+            return newExceptionPromise(new AuthenticationException("OpenIdConnectModule configuration is invalid."));
+        }
+
+        return newResultPromise(null);
     }
 
     @Override

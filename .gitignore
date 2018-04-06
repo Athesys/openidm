@@ -1,3 +1,6 @@
+#Vsisual Studio Code Support
+.vscode
+
 #--- Java ignores ---
 *.class
 

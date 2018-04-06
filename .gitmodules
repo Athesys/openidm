@@ -1,0 +1,9 @@
+[submodule "openicf-java-framework"]
+	path = openicf-java-framework
+	url = git@github.com:Athesys/openicf-java-framework.git
+[submodule "openicf-maven-plugin"]
+	path = openicf-maven-plugin
+	url = git@github.com:Athesys/openicf-maven-plugin.git
+[submodule "openicf-license"]
+	path = openicf-license
+	url = git@github.com:Athesys/openicf-license.git
