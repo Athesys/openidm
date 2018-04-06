@@ -60,6 +60,9 @@ public class KeyStoreManagementServiceImplTest {
         when(trustStoreService.getKeyStoreDetails())
                 .thenReturn(new KeyStoreDetails(KeyStoreType.JKS, "SUN", "none", "changeit"));
         final KeyStoreManagementServiceImpl keyStoreManagementService = new KeyStoreManagementServiceImpl();
+
+        //These methods do not exist in KeyStoreManagementServiceImpl,
+        //but the test are ok with mvn clean install, fail with mvn install if was launched an mvn install before. 
         keyStoreManagementService.bindKeyStore(keyStoreService);
         keyStoreManagementService.bindTrustStore(trustStoreService);
 
