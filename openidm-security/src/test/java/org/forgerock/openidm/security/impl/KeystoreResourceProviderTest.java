@@ -209,10 +209,15 @@ public class KeystoreResourceProviderTest {
         Assertions.assertThat(certificate).isNotNull();
 
         final String certAsPEM = convertCertToPEM(certificate.getEncoded());
+
+        String loadCert = result.get("cert").asString();
+        
+        loadCert = loadCert.replace("\n","").replace("\r","");
+
         Assertions.assertThat(certAsPEM)
                 .isNotNull()
                 .isNotEmpty()
-                .isEqualToIgnoringWhitespace(replaceNewLines(result.get("cert").asString()));
+                .isEqualToIgnoringWhitespace(replaceNewLines(loadCert));
 
         PrivateKey privateKey = privateKeyEntry.getPrivateKey();
         Assertions.assertThat(privateKey).isNotNull();
