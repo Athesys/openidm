@@ -77,6 +77,8 @@ public class SelfServiceTest {
 
         // Set up the selfService object
         SelfService selfService = new SelfService();
+
+        //This has no sense... more investigation are need
         selfService.bindIdentityProviderService(identityProviderService);
 
         // when the listener is being registered to nothing for testing purposes

@@ -126,8 +126,8 @@
         <commons.commons-bom.version>21.0.0-SNAPSHOT</commons.commons-bom.version>
 
         <!-- Commons versions -->
-        <!-- <commons.forgerock-script.version>4.2.0</commons.forgerock-script.version>  -->
-        <commons.forgerock-script.version>3.0.3</commons.forgerock-script.version>
+        <commons.forgerock-script.version>4.2.0</commons.forgerock-script.version>
+        <!-- <commons.forgerock-script.version>3.0.3</commons.forgerock-script.version> -->
         <commons.forgerock-i18n.version>1.4.2</commons.forgerock-i18n.version>
         <commons.forgerock-launcher.version>2.0.6</commons.forgerock-launcher.version>
 
